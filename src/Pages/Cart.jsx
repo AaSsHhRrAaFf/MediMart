@@ -1,10 +1,15 @@
-// src/Pages/Cart.jsx
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { useCart } from '../Context/CartContext';
+import React from "react";
+import { Link } from "react-router-dom";
+import { useCart } from "../Context/CartContext";
 
 const Cart = () => {
-  const { cartItems, removeFromCart, clearCart, increaseQuantity, decreaseQuantity } = useCart();
+  const {
+    cartItems,
+    removeFromCart,
+    clearCart,
+    increaseQuantity,
+    decreaseQuantity,
+  } = useCart();
 
   return (
     <div className="container mx-auto p-4">
@@ -21,25 +26,28 @@ const Cart = () => {
           </div>
 
           {cartItems.map((item) => (
-            <div key={item.medicineId} className="grid grid-cols-5 gap-4 items-center border-b py-2">
+            <div
+              key={item.medicineId}
+              className="grid grid-cols-5 gap-4 items-center border-b py-2"
+            >
               <span>{item.name}</span>
               <span>{item.company}</span>
               <span>${item.pricePerUnit}</span>
               <div className="flex items-center gap-2">
-                  <button
-                    onClick={() => decreaseQuantity(item.medicineId)}
-                    className="px-2 py-1 bg-gray-200 hover:bg-gray-300 rounded"
-                  >
-                    -
-                  </button>
-                  <span>{item.quantity}</span>
-                  <button
-                    onClick={() => increaseQuantity(item.medicineId)}
-                    className="px-2 py-1 bg-gray-200 hover:bg-gray-300 rounded"
-                  >
-                    +
-                  </button>
-                </div>
+                <button
+                  onClick={() => decreaseQuantity(item.medicineId)}
+                  className="px-2 py-1 bg-gray-200 hover:bg-gray-300 rounded"
+                >
+                  -
+                </button>
+                <span>{item.quantity}</span>
+                <button
+                  onClick={() => increaseQuantity(item.medicineId)}
+                  className="px-2 py-1 bg-gray-200 hover:bg-gray-300 rounded"
+                >
+                  +
+                </button>
+              </div>
               <button
                 onClick={() => removeFromCart(item.medicineId)}
                 className="px-2 py-1 bg-red-500 text-white hover:bg-red-600 rounded"
