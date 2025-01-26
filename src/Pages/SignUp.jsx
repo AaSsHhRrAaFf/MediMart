@@ -1,4 +1,3 @@
-// src/Pages/SignUp.jsx
 import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
@@ -21,16 +20,12 @@ const SignupPage = () => {
       const userCredential = await createUser(data.email, data.password);
       const user = userCredential.user;
 
-      // Send user data to the server
-      const response = await api.post(
-        "/api/users/signup",
-        {
-          username: data.username,
-          email: data.email,
-          role: data.role,
-          photo: data.photo,
-        }
-      );
+      const response = await api.post("/api/users/signup", {
+        username: data.username,
+        email: data.email,
+        role: data.role,
+        photo: data.photo,
+      });
 
       if (response.status === 201) {
         navigate("/");
@@ -52,7 +47,7 @@ const SignupPage = () => {
       console.error(err);
     }
   };
-  // rest of the component
+
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
       <Helmet>
