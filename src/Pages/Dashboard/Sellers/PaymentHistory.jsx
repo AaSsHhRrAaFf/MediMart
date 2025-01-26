@@ -1,4 +1,3 @@
-// src/Pages/Dashboard/Sellers/PaymentHistory.jsx
 import React from "react";
 
 const PaymentHistory = ({ paymentHistory }) => {

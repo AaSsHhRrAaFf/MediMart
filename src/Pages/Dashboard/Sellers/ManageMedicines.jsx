@@ -1,4 +1,3 @@
-// src/Pages/Dashboard/Sellers/ManageMedicines.jsx
 import React, { useState, useContext } from "react";
 import { useForm } from "react-hook-form";
 import api from "../../../services/api";
@@ -41,7 +40,7 @@ const ManageMedicines = ({ medicines }) => {
   const { mutate: addMedicine, isLoading: isAddingMedicine } = useMutation({
     mutationFn: async (data) => {
       const medicineId = uuidv4();
-      console.log("Data from mutation function:", data); // added console log
+      console.log("Data from mutation function:", data);
       const response = await api.post("/api/medicines/add", {
         medicines: [
           {

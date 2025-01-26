@@ -1,4 +1,3 @@
-// src/Pages/Dashboard/Sellers/SellerDashboard.jsx
 import React, { useState, useEffect, useContext } from "react";
 import { Helmet } from "react-helmet-async";
 import { useQuery } from "@tanstack/react-query";
@@ -56,7 +55,7 @@ const SellerDashboard = () => {
     {
       key: "1",
       label: "Seller Homepage",
-      component: <SellerHomepage />, // Render SellerHomepage by default
+      component: <SellerHomepage />,
     },
     {
       key: "2",
