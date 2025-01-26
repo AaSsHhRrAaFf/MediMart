@@ -1,28 +1,31 @@
-// File: src/Components/Home/CategoryCard.jsx
 import React from "react";
 import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import api from "../../services/api";
-import LoadSpinner from "../Shared/Loadspinner";
+import LoadSpinner from "../Shared/LoadSpinner";
 
 const CategoryCard = () => {
-    const { data: categories, isLoading, isError } = useQuery({
-        queryKey: ["categories"],
-        queryFn: async () => {
-            const res = await api.get("/api/categories/all");
-            return res.data;
-        },
-    });
+  const {
+    data: categories,
+    isLoading,
+    isError,
+  } = useQuery({
+    queryKey: ["categories"],
+    queryFn: async () => {
+      const res = await api.get("/api/categories/all");
+      return res.data;
+    },
+  });
 
-    if (isLoading) {
-        return <LoadSpinner/>;
-    }
+  if (isLoading) {
+    return <LoadSpinner />;
+  }
 
-  /*   if (isError) {
-        return <div>Error loading categories</div>;
-    }
-    */ 
-    return (
+  if (isError) {
+    return <div>Error loading categories</div>;
+  }
+
+  return (
     <div className="bg-gray-100 py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="text-2xl font-bold text-gray-900 mb-8">
@@ -30,10 +33,11 @@ const CategoryCard = () => {
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {categories?.map((category) => (
-            <Link to={`/category/${category.categoryName}`} key={category.categoryId}>
-              <div
-                className="bg-white rounded-lg shadow p-6 flex flex-col items-center"
-              >
+            <Link
+              to={`/category/${category.categoryName}`}
+              key={category.categoryId}
+            >
+              <div className="bg-white rounded-lg shadow p-6 flex flex-col items-center">
                 <img
                   src={category.categoryImage}
                   alt={category.categoryName}
