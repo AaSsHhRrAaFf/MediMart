@@ -1,4 +1,3 @@
-// src/Pages/CheckoutPage.jsx
 import React, { useState, useContext, useEffect } from "react";
 import { Card, Input, Button } from "antd";
 import { loadStripe } from "@stripe/stripe-js";
@@ -15,7 +14,7 @@ import { useNavigate } from "react-router-dom";
 import api from "../services/api";
 import Swal from "sweetalert2";
 import { AuthContext } from "../Context/AuthContext";
-import { v4 as uuidv4 } from "uuid"; // Import uuid
+import { v4 as uuidv4 } from "uuid";
 
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
 
@@ -46,13 +45,13 @@ const CheckoutForm = () => {
 
     try {
       console.log("Creating payment intent...", {
-        amount: Math.round(totalPrice * 100), // Amount in cents
+        amount: Math.round(totalPrice * 100),
         currency: "usd",
       });
       const paymentIntentResponse = await api.post(
         "/api/payment/create-payment-intent",
         {
-          amount: Math.round(totalPrice * 100), // Amount in cents
+          amount: Math.round(totalPrice * 100),
           currency: "usd",
         }
       );
@@ -117,7 +116,7 @@ const CheckoutForm = () => {
             quantity: item.quantity,
           })),
         };
-        // Send payment data to the backend
+
         try {
           await api.post("/api/users/payment-history", paymentData);
           console.log("Payment data stored successfully");
