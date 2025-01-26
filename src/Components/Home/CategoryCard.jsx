@@ -3,24 +3,25 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import api from "../../services/api";
+import LoadSpinner from "../Shared/Loadspinner";
 
 const CategoryCard = () => {
     const { data: categories, isLoading, isError } = useQuery({
         queryKey: ["categories"],
         queryFn: async () => {
-            const res = await api.get("/categories/all");
+            const res = await api.get("/api/categories/all");
             return res.data;
         },
     });
 
     if (isLoading) {
-        return <div>Loading categories...</div>;
+        return <LoadSpinner/>;
     }
 
-    if (isError) {
+  /*   if (isError) {
         return <div>Error loading categories</div>;
     }
-    
+    */ 
     return (
     <div className="bg-gray-100 py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

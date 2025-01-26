@@ -1,4 +1,4 @@
-// src/Components/Home/DiscountProductsSlider.jsx
+// src/Components/Home/SliderSection.jsx
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
@@ -8,18 +8,17 @@ import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import { useQuery } from "@tanstack/react-query";
 import api from "../../services/api";
 import LoadSpinner from "../Shared/LoadSpinner";
-import { Helmet } from "react-helmet-async";
 
-const DiscountProductsSlider = () => {
+const SliderSection = () => {
   const {
-    data: discountedProducts,
+    data: slides,
     isLoading,
     isError,
   } = useQuery({
-    queryKey: ["discountedProducts"],
+    queryKey: ["advertiseMedicines"],
     queryFn: async () => {
-      const res = await api.get("/api/medicines/discounted");
-      console.log("Discounted products data from API:", res.data);
+      const res = await api.get("/api/medicines/advertise");
+      console.log("Slider data from API:", res.data);
       return res.data;
     },
   });
@@ -29,18 +28,15 @@ const DiscountProductsSlider = () => {
   }
 
   if (isError) {
-    console.error("Error loading discounted products data");
-    return <div>Error loading discounted products data</div>;
+    console.error("Error loading slider data");
+    return <div>Error loading slider data</div>;
   }
 
   return (
     <div className="bg-gray-100 py-12">
-      <Helmet>
-        <title>Discounted Products</title>
-      </Helmet>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="text-2xl font-bold text-gray-900 mb-8">
-          Discounted Products
+          Featured Products
         </h2>
         <Swiper
           modules={[Navigation, Pagination, Autoplay]}
@@ -58,25 +54,20 @@ const DiscountProductsSlider = () => {
             1024: { slidesPerView: 3 },
           }}
         >
-          {discountedProducts?.map((product, index) => (
+          {slides?.map((slide, index) => (
             <SwiperSlide key={index}>
               <div className="bg-white rounded-lg shadow p-6 flex flex-col items-center">
                 <img
-                  src={product.image}
-                  alt={product.name}
+                  src={slide.image}
+                  alt={slide.name}
                   className="w-32 h-32 object-cover rounded-full mb-4"
                 />
                 <h3 className="text-lg font-semibold text-gray-800">
-                  {product.name}
+                  {slide.name}
                 </h3>
-                <p className="text-gray-500 mt-2 line-through">
-                  ${product.originalPrice.toFixed(2)}
-                </p>
-                <p className="text-gray-800 mt-2">
-                  ${product.discountedPrice.toFixed(2)}
-                </p>
-                <p className="text-green-500 mt-2">
-                  {product.discountPercentage}% Off
+                <p className="text-gray-500 mt-2">{slide.description}</p>
+                <p className="text-gray-500 mt-2">
+                  Seller: {slide.sellerEmail}
                 </p>
               </div>
             </SwiperSlide>
@@ -87,4 +78,4 @@ const DiscountProductsSlider = () => {
   );
 };
 
-export default DiscountProductsSlider;
+export default SliderSection;

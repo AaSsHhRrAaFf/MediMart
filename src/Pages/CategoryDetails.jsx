@@ -23,7 +23,8 @@ const CategoryDetails = () => {
            if(!user){
                 navigate('/login')
            }
-          const res = await api.get(`/medicines/category/${categoryName}`);
+          const res = await api.get(`/api/medicines/category/${categoryName}`);
+          console.log(res)
           return res.data;
         },
       });
@@ -32,9 +33,9 @@ const CategoryDetails = () => {
         return <div>Loading medicines...</div>;
       }
   
-      if (isError) {
+     /*  if (isError) {
         return <div>Error loading medicines</div>;
-      }
+      } */
 
 
     const openModal = (medicine) => {
