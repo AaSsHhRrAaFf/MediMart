@@ -1,4 +1,3 @@
-// src/Pages/Dashboard/UserDashboard.jsx
 import React, { useContext, useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { useQuery } from "@tanstack/react-query";
@@ -34,7 +33,7 @@ const UserDashboard = () => {
         const response = await api.get(
           `/api/users/payment-history?page=${currentPage}&limit=${pageSize}`
         );
-        console.log("Payment history response:", response); // Log the entire response
+        console.log("Payment history response:", response);
         if (response.status === 401 || response.status === 403) {
           navigate("/login");
           localStorage.removeItem("accessToken");
@@ -48,15 +47,15 @@ const UserDashboard = () => {
         throw error;
       }
     },
-    enabled: !!user, // Ensure the query doesn't run if user is null
+    enabled: !!user,
   });
 
   useEffect(() => {
     console.log("paymentHistoryData changed:", paymentHistoryData);
   }, [paymentHistoryData]);
 
-  const paymentHistory = paymentHistoryData?.payments || []; // Access payments from data
-  const totalPayments = paymentHistoryData?.total || 0; // Access total count from data
+  const paymentHistory = paymentHistoryData?.payments || [];
+  const totalPayments = paymentHistoryData?.total || 0;
 
   useEffect(() => {
     console.log("paymentHistory:", paymentHistory);
