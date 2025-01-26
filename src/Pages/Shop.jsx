@@ -1,34 +1,34 @@
-// src/Pages/Shop.jsx
 import React, { useState } from "react";
 import Modal from "react-modal";
 import { useQuery } from "@tanstack/react-query";
 import api from "../services/api";
 import { useCart } from "../Context/CartContext";
-import LoadSpinner from "../Components/Shared/Loadspinner";
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-
+import LoadSpinner from "../Components/Shared/LoadSpinner";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const ShopPage = () => {
   const [selectedMedicine, setSelectedMedicine] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { cartItems, addToCart } = useCart();
 
+  const notify = (message) =>
+    toast.warn(message, {
+      position: "top-center",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
 
-    const notify = (message) => toast.warn(message, {
-        position: "top-center",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-        });
-
-
-
-  const { data: medicines, isLoading, isError } = useQuery({
+  const {
+    data: medicines,
+    isLoading,
+    isError,
+  } = useQuery({
     queryKey: ["medicines"],
     queryFn: async () => {
       const res = await api.get("/api/medicines/all");
@@ -36,7 +36,7 @@ const ShopPage = () => {
     },
   });
   if (isLoading) {
-    return <LoadSpinner/>;
+    return <LoadSpinner />;
   }
 
   const openModal = (medicine) => {
@@ -49,26 +49,26 @@ const ShopPage = () => {
     setIsModalOpen(false);
   };
 
-    const handleAddToCart = (medicine) => {
-        const isMedicineInCart = cartItems.some(item => item.medicineId === medicine.medicineId);
-        if (isMedicineInCart) {
-             notify("Medicine already in cart");
-            return;
-        }
-        addToCart(medicine);
-        toast.success('Medicine added to cart!', {
-            position: "top-center",
-            autoClose: 3000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-            });
-    };
-
-
+  const handleAddToCart = (medicine) => {
+    const isMedicineInCart = cartItems.some(
+      (item) => item.medicineId === medicine.medicineId
+    );
+    if (isMedicineInCart) {
+      notify("Medicine already in cart");
+      return;
+    }
+    addToCart(medicine);
+    toast.success("Medicine added to cart!", {
+      position: "top-center",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+  };
 
   return (
     <div className="min-h-screen bg-gray-100 p-8">
