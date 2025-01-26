@@ -1,4 +1,3 @@
-// src/Pages/CategoryDetailsPage.jsx
 import React, { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
@@ -10,50 +9,52 @@ import { useContext } from "react";
 import { AuthContext } from "../Context/AuthContext";
 
 const CategoryDetails = () => {
-    const { categoryName } = useParams();
-    const [selectedMedicine, setSelectedMedicine] = useState(null);
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const { addToCart } = useCart();
-    const { user } = useContext(AuthContext);
-     const navigate = useNavigate();
+  const { categoryName } = useParams();
+  const [selectedMedicine, setSelectedMedicine] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const { addToCart } = useCart();
+  const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
 
-    const { data: medicines, isLoading, isError } = useQuery({
-        queryKey: ["medicines", categoryName],
-        queryFn: async () => {
-           if(!user){
-                navigate('/login')
-           }
-          const res = await api.get(`/api/medicines/category/${categoryName}`);
-          console.log(res)
-          return res.data;
-        },
-      });
-  
-      if (isLoading) {
-        return <div>Loading medicines...</div>;
+  const {
+    data: medicines,
+    isLoading,
+    isError,
+  } = useQuery({
+    queryKey: ["medicines", categoryName],
+    queryFn: async () => {
+      if (!user) {
+        navigate("/login");
       }
-  
-     /*  if (isError) {
-        return <div>Error loading medicines</div>;
-      } */
+      const res = await api.get(`/api/medicines/category/${categoryName}`);
+      console.log(res);
+      return res.data;
+    },
+  });
 
+  if (isLoading) {
+    return <div>Loading medicines...</div>;
+  }
 
-    const openModal = (medicine) => {
-        setSelectedMedicine(medicine);
-        setIsModalOpen(true);
-    };
+  if (isError) {
+    return <div>Error loading medicines</div>;
+  }
 
-    const closeModal = () => {
-        setSelectedMedicine(null);
-        setIsModalOpen(false);
-    };
+  const openModal = (medicine) => {
+    setSelectedMedicine(medicine);
+    setIsModalOpen(true);
+  };
 
-    const handleAddToCart = (medicine) => {
-      addToCart(medicine);
-    };
+  const closeModal = () => {
+    setSelectedMedicine(null);
+    setIsModalOpen(false);
+  };
 
+  const handleAddToCart = (medicine) => {
+    addToCart(medicine);
+  };
 
-    return (
+  return (
     <div className="min-h-screen bg-gray-100 p-6">
       <Helmet>
         <title>Category Details</title>
@@ -66,28 +67,42 @@ const CategoryDetails = () => {
         <table className="min-w-full bg-white border border-gray-300">
           <thead>
             <tr>
-              <th className="px-6 py-3 border-b text-left text-sm font-medium text-gray-700 uppercase">Name</th>
-              <th className="px-6 py-3 border-b text-left text-sm font-medium text-gray-700 uppercase">Company</th>
-               <th className="px-6 py-3 border-b text-left text-sm font-medium text-gray-700 uppercase">Price</th>
-              <th className="px-6 py-3 border-b text-left text-sm font-medium text-gray-700 uppercase">Actions</th>
+              <th className="px-6 py-3 border-b text-left text-sm font-medium text-gray-700 uppercase">
+                Name
+              </th>
+              <th className="px-6 py-3 border-b text-left text-sm font-medium text-gray-700 uppercase">
+                Company
+              </th>
+              <th className="px-6 py-3 border-b text-left text-sm font-medium text-gray-700 uppercase">
+                Price
+              </th>
+              <th className="px-6 py-3 border-b text-left text-sm font-medium text-gray-700 uppercase">
+                Actions
+              </th>
             </tr>
           </thead>
           <tbody>
-          {medicines?.map((medicine) => (
+            {medicines?.map((medicine) => (
               <tr key={medicine.medicineId}>
-                 <td className="px-6 py-4 border-b text-sm text-gray-800">{medicine.name}</td>
-                  <td className="px-6 py-4 border-b text-sm text-gray-800">{medicine.company}</td>
-                <td className="px-6 py-4 border-b text-sm text-gray-800">${medicine.pricePerUnit}</td>
+                <td className="px-6 py-4 border-b text-sm text-gray-800">
+                  {medicine.name}
+                </td>
+                <td className="px-6 py-4 border-b text-sm text-gray-800">
+                  {medicine.company}
+                </td>
+                <td className="px-6 py-4 border-b text-sm text-gray-800">
+                  ${medicine.pricePerUnit}
+                </td>
                 <td className="px-6 py-4 border-b text-sm text-gray-800">
                   <button
                     onClick={() => openModal(medicine)}
-                     className="mr-2 px-3 py-1 bg-blue-500 text-white text-sm font-medium rounded hover:bg-blue-600"
+                    className="mr-2 px-3 py-1 bg-blue-500 text-white text-sm font-medium rounded hover:bg-blue-600"
                   >
                     Eye
                   </button>
-                   <button
+                  <button
                     onClick={() => handleAddToCart(medicine)}
-                      className="px-3 py-1 bg-green-500 text-white text-sm font-medium rounded hover:bg-green-600"
+                    className="px-3 py-1 bg-green-500 text-white text-sm font-medium rounded hover:bg-green-600"
                   >
                     Select
                   </button>
@@ -108,7 +123,7 @@ const CategoryDetails = () => {
         >
           <div className="p-4">
             <h2 className="text-2xl font-bold mb-4">{selectedMedicine.name}</h2>
-             <img
+            <img
               src={selectedMedicine.image}
               alt={selectedMedicine.name}
               className="w-full h-64 object-cover rounded mb-4"
@@ -122,7 +137,7 @@ const CategoryDetails = () => {
             <p className="text-sm text-gray-700 mb-2">
               <strong>Company:</strong> {selectedMedicine.company}
             </p>
-              <p className="text-sm text-gray-700 mb-2">
+            <p className="text-sm text-gray-700 mb-2">
               <strong>Price:</strong> ${selectedMedicine.pricePerUnit}
             </p>
           </div>
