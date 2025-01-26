@@ -1,7 +1,6 @@
-// src/Pages/Dashboard/Admin/ManageBannerAdvertise.jsx
 import React from "react";
 import { Switch } from "antd";
-import api from "../../../services/api"; // Ensure you have an API service set up
+import api from "../../../services/api";
 
 const ManageBannerAdvertise = ({ bannerAdvertise }) => {
   console.log(
