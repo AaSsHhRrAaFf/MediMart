@@ -1,4 +1,3 @@
-// src/Pages/Dashboard/Sellers/AskForAdvertisement.jsx
 import React, { useState, useContext } from "react";
 import { Dialog } from "@headlessui/react";
 import { useForm } from "react-hook-form";
