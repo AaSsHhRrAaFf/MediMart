@@ -1,4 +1,3 @@
-// src/Pages/InvoicePage.jsx
 import React, { useContext } from "react";
 import { Card, Button } from "antd";
 import "antd/dist/reset.css";
@@ -15,10 +14,10 @@ const InvoicePage = () => {
     totalPrice: 0,
     userName: "N/A",
   };
-
+  /* 
   console.log("Invoice Items:", invoiceItems);
   console.log("Total Price:", totalPrice);
-  console.log("User Name:", userName);
+  console.log("User Name:", userName); */
 
   const handlePrint = () => {
     window.print();
