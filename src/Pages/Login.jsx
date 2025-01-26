@@ -1,4 +1,4 @@
-// src/Pages/Login.jsx
+
 import React, { useContext, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
@@ -37,7 +37,7 @@ const LoginPage = () => {
       console.error(err);
     }
   };
-  // rest of the component
+
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
       <Helmet>

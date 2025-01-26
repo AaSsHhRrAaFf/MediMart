@@ -6,6 +6,7 @@ import { useCart } from "../Context/CartContext";
 import LoadSpinner from "../Components/Shared/LoadSpinner";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Helmet } from "react-helmet-async";
 
 const ShopPage = () => {
   const [selectedMedicine, setSelectedMedicine] = useState(null);
@@ -72,6 +73,9 @@ const ShopPage = () => {
 
   return (
     <div className="min-h-screen bg-gray-100 p-8">
+      <Helmet>
+        <title>Shop</title>
+      </Helmet>
       <h1 className="text-3xl font-bold text-center mb-6">Shop Medicines</h1>
       <div className="overflow-x-auto">
         <table className="min-w-full bg-white border border-gray-300">
