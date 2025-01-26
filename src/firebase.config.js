@@ -1,4 +1,4 @@
-//File: src/firebase.config.js
+
 import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider, GithubAuthProvider } from "firebase/auth";
 import { getStorage } from "firebase/storage";
