@@ -58,7 +58,7 @@ export default function Footer() {
                   href="mailto:info@medimart.com"
                   className="hover:text-blue-400 transition-colors"
                 >
-                  info@medimart.com
+                  inFo@medimart.com
                 </a>
               </li>
               <li className="flex items-center">
