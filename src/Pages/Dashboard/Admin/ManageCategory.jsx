@@ -1,4 +1,4 @@
-// src/Pages/Dashboard/Admin/ManageCategory.jsx
+
 import React, { useState } from "react";
 import { Button, Modal, Input } from "antd";
 import api from "../../../services/api";
