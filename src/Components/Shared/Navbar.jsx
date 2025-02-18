@@ -4,14 +4,13 @@ import { AuthContext } from "../../Context/AuthContext";
 import { useCart } from "../../Context/CartContext";
 import logo from "../../assets/logo.jpg";
 
+
 const Navbar = () => {
-  const [selectedLanguage, setSelectedLanguage] = useState("EN");
-  const [isLanguageDropdownOpen, setIsLanguageDropdownOpen] = useState(false);
   const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
   const { user, logOut } = useContext(AuthContext);
   const { cartItems } = useCart();
   const [cartItemCount, setCartItemCount] = useState(0);
-  const languages = ["EN", "ES", "FR", "DE"];
+
 
   useEffect(() => {
     setCartItemCount(cartItems.length);
@@ -27,14 +26,14 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-gray-800 text-white shadow-md">
+    <nav className="bg-[#25A8D6] text-white lg:px-32">
       <div className="container mx-auto px-4 py-3 flex items-center justify-between">
         {/* Logo and Website Name */}
         <div className="flex items-center space-x-2">
           <img
             src={logo}
             alt="Logo"
-            className="h-14 rounded-2xl object-contain"
+            className="h-10 rounded-xl object-contain"
           />
           <span className="text-3xl font-bold">MediMart</span>
         </div>
@@ -48,9 +47,10 @@ const Navbar = () => {
           </li>
           <li>
             <Link to="/shop" className="hover:text-gray-300 transition-colors">
-              Shop
+            All Medicines
             </Link>
           </li>
+         
         </ul>
 
         <div className="flex items-center space-x-6">
@@ -118,51 +118,13 @@ const Navbar = () => {
             </div>
           ) : (
             <Link to="/login">
-              <button className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded transition-colors">
-                Join Us
+              <button className="bg-gradient-to-tr from-[#60DBEA] to-[#C4EE7D] hover:bg-gradient-to-l text-white text-xl font-medium px-4 py-2 rounded transition-colors">
+               Login
               </button>
             </Link>
           )}
 
-          {/* Language Dropdown */}
-          <div className="relative">
-            <button
-              onClick={() => setIsLanguageDropdownOpen(!isLanguageDropdownOpen)}
-              className="flex items-center space-x-1 bg-gray-700 px-3 py-1 rounded hover:bg-gray-600 transition-colors"
-            >
-              <span>{selectedLanguage}</span>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-4 w-4"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M19 9l-7 7-7-7"
-                />
-              </svg>
-            </button>
-            {isLanguageDropdownOpen && (
-              <div className="absolute right-0 mt-2 w-28 bg-white text-gray-800 rounded shadow-md">
-                {languages.map((lang) => (
-                  <button
-                    key={lang}
-                    className="block w-full text-left px-4 py-2 hover:bg-gray-200 transition-colors"
-                    onClick={() => {
-                      setSelectedLanguage(lang);
-                      setIsLanguageDropdownOpen(false);
-                    }}
-                  >
-                    {lang}
-                  </button>
-                ))}
-              </div>
-            )}
-          </div>
+        
         </div>
       </div>
     </nav>
