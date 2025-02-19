@@ -87,3 +87,4 @@ const ManageBannerAdvertise = ({ bannerAdvertise }) => {
 };
 
 export default ManageBannerAdvertise;
+//ui
