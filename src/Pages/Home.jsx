@@ -6,19 +6,21 @@ import SliderSection from "../Components/Home/SliderSection";
 import CustomerTestimonialsSection from "../Components/Home/CustomerTestimonialsSection";
 import HealthTipsSection from "../Components/Home/HealthTipsSection";
 
+
 function Home() {
   return (
-    <>
+    <div className="lg:px-36">
       <Helmet>
         <title>Home | Multi-Vendor Medicine E-commerce</title>
         
       </Helmet>
+    
       <SliderSection/>
       <CategoryCardSection />
       <DiscountProductsSlider />
       <CustomerTestimonialsSection/>
       <HealthTipsSection/>
-    </>
+    </div>
   );
 }
 
